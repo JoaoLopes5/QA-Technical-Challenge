@@ -20,43 +20,56 @@ As automações foram implementadas com foco em:
 - JavaScript
 - Faker
 - Lighthouse
-- Mochawesome
 
 ## API Testing
 - Postman
 - Newman
+
+## CI/CD
+- GitHub Actions
 
 ---
 
 # Estrutura do projeto
 
 ```txt
-ui-tests/
+QA-technical-challenge/
 │
-├── cypress/
-│   ├── e2e/
-│   │   ├── login/
-│   │   ├── sorting/
-│   │   ├── cart/
-│   │   ├── checkout/
-│   │   ├── navigation/
-│   │   ├── logout/
-│   │   ├── responsive/
-│   │   └── accessibility/
+├── ui-tests/
+│   ├── cypress/
+│   │   ├── e2e/
+│   │   │   ├── login/
+│   │   │   ├── sorting/
+│   │   │   ├── cart/
+│   │   │   ├── checkout/
+│   │   │   ├── navigation/
+│   │   │   ├── logout/
+│   │   │   ├── responsive/
+│   │   │   └── accessibility/
+│   │   │
+│   │   ├── fixtures/
+│   │   ├── pages/
+│   │   └── support/
 │   │
-│   ├── fixtures/
+│   ├── reports/
+│   ├── evidences/
+│   ├── package.json
+│   └── cypress.config.js
+│
+├── api-tests/
+│   ├── collection/
+│   │   └── Restful-booker.postman_collection.json
 │   │
-│   ├── pages/
+│   ├── environments/
+│   │   └── Restful-booker.postman_environment.json
 │   │
-│   └── support/
+│   ├── package.json
+│   
 │
-├── reports/
-│
-├── evidences/
-│
-├── package.json
-│
-└── README.md
+└── .github/
+    └── workflows/
+        ├── ui-tests.yml
+        └── api-tests.yml
 ```
 
 ---
@@ -68,17 +81,27 @@ ui-tests/
 | Cypress | Automação E2E |
 | Faker | Geração de dados dinâmicos |
 | Lighthouse | Auditoria de acessibilidade e performance |
-| Mochawesome | Relatórios de execução |
 | Postman | Testes de API |
 | Newman | Execução automatizada da collection |
+| GitHub Actions | Integração contínua |
 
 ---
 
 # Como executar o projeto
 
-## Instalar dependências
+# Instalar dependências
+
+## UI Tests
 
 ```bash
+cd ui-tests
+npm install
+```
+
+## API Tests
+
+```bash
+cd api-tests
 npm install
 ```
 
@@ -89,12 +112,14 @@ npm install
 ## Abrir interface Cypress
 
 ```bash
+cd ui-tests
 npx cypress open
 ```
 
 ## Executar em modo headless
 
 ```bash
+cd ui-tests
 npx cypress run
 ```
 
@@ -103,7 +128,8 @@ npx cypress run
 # Executar API Tests
 
 ```bash
-newman run restful-booker-collection.json
+cd api-tests
+npm run api:test
 ```
 
 ---
@@ -111,6 +137,7 @@ newman run restful-booker-collection.json
 # Executar Lighthouse Audit
 
 ```bash
+cd ui-tests
 npx lighthouse https://www.saucedemo.com --output html --output-path ./reports/lighthouse-report.html
 ```
 
@@ -136,7 +163,7 @@ npx lighthouse https://www.saucedemo.com --output html --output-path ./reports/l
 ### Carrinho
 - Adicionar produto ao carrinho
 - Remover produto do carrinho
-- Validar badge do carrinho
+- Validação da badge do carrinho
 
 ### Checkout
 - Fluxo completo de compra
@@ -181,6 +208,8 @@ Auditoria utilizando Google Lighthouse:
 ## Nível 1 (Obrigatório)
 
 ### Auth
+- Login com sucesso
+- Login inválido
 - Geração de token
 
 ### CRUD reservas
@@ -191,8 +220,29 @@ Auditoria utilizando Google Lighthouse:
 
 ### Validações
 - Campos obrigatórios
+- Payload inválido
 - Status code
 - Estrutura de resposta
+
+---
+
+## Nível 2 (Diferencial)
+
+### Testes de Performance
+- Validação de tempo de resposta da API
+- Verificação de SLA básico
+- Monitoramento de response time nos principais endpoints
+
+### Testes de Segurança
+- Login inválido
+- Atualização de reserva sem autenticação
+- Exclusão de reserva sem token
+- Validação de acesso não autorizado
+
+### Automação via scripts
+- Execução automatizada com Newman
+- Integração contínua com GitHub Actions
+- Execução via terminal utilizando scripts npm
 
 ---
 
@@ -202,10 +252,24 @@ Auditoria utilizando Google Lighthouse:
 - Dados dinâmicos com Faker
 - Testes responsivos
 - Auditoria Lighthouse
-- Relatórios Mochawesome
+- Integração contínua com GitHub Actions
 - Estrutura escalável
 - Separação por responsabilidade
 - Cenários positivos e negativos
+- Automação API com Newman
+- Testes básicos de performance API
+- Testes básicos de segurança API
+
+---
+
+# CI/CD
+
+O projeto possui integração contínua utilizando GitHub Actions.
+
+Pipelines automatizadas:
+- Execução de testes UI com Cypress
+- Execução de testes API com Newman
+- Validação automática em push e pull request
 
 ---
 
@@ -214,7 +278,7 @@ Auditoria utilizando Google Lighthouse:
 As evidências do projeto estão disponíveis em:
 
 ```txt
-/evidences
+/ui-tests/evidences
 ```
 
 Incluindo:
@@ -226,14 +290,12 @@ Incluindo:
 
 # Relatórios
 
-## Mochawesome
-Os relatórios de execução são gerados automaticamente após a execução dos testes.
-
 ## Lighthouse
+
 Os relatórios de acessibilidade e performance estão disponíveis em:
 
 ```txt
-/reports/lighthouse-report.html
+/ui-tests/reports/lighthouse-report.html
 ```
 
 ---
@@ -249,11 +311,11 @@ Os relatórios de acessibilidade e performance estão disponíveis em:
 
 # Melhorias futuras
 
-- Integração contínua com GitHub Actions
 - Execução paralela dos testes
 - Integração com Allure Reports
 - Testes visuais automatizados
-- Testes cross-browser
+- Execução cross-browser
+- Pipeline com deploy automático
 
 ---
 
