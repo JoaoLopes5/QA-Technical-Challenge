@@ -33,7 +33,7 @@ As automações foram implementadas com foco em:
 # Estrutura do projeto
 
 ```txt
-QA-technical-challenge/
+QA-Technical-Challenge/
 │
 ├── ui-tests/
 │   ├── cypress/
