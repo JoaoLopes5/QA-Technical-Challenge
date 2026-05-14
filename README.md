@@ -74,22 +74,7 @@ QA-Technical-Challenge/
 
 ---
 
-# Tecnologias e bibliotecas
-
-| Ferramenta | Objetivo |
-|---|---|
-| Cypress | Automação E2E |
-| Faker | Geração de dados dinâmicos |
-| Lighthouse | Auditoria de acessibilidade e performance |
-| Postman | Testes de API |
-| Newman | Execução automatizada da collection |
-| GitHub Actions | Integração contínua |
-
----
-
 # Como executar o projeto
-
-# Instalar dependências
 
 ## UI Tests
 
@@ -142,8 +127,6 @@ npx lighthouse https://www.saucedemo.com --output html --output-path ./reports/l
 ```
 
 ---
-
-# Cenários implementados
 
 # UI Testing — Sauce Demo
 
@@ -311,11 +294,9 @@ Os relatórios de acessibilidade e performance estão disponíveis em:
 
 # Melhorias futuras
 
-- Execução paralela dos testes
 - Integração com Allure Reports
-- Testes visuais automatizados
-- Execução cross-browser
-- Pipeline com deploy automático
+- Expansão da cobertura de testes
+- Containerização com Docker
 
 ---
 
